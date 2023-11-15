@@ -12,9 +12,11 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 @Configuration
-@EnableWebMvc
+@EnableWebMvc //приложение spring mvc web
 @ComponentScan("web")
-public class WebConfig implements WebMvcConfigurer {
+public class WebConfig implements WebMvcConfigurer { //Ётот интерфейс реализуетс€,
+    // когда мы под себ€ ходим настроить SpringMVC.
+    // ¬место стандартного шаблонизатора мы используем шаблонизатор Thymeleaf
 
     private final ApplicationContext applicationContext;
 
@@ -22,13 +24,12 @@ public class WebConfig implements WebMvcConfigurer {
         this.applicationContext = applicationContext;
     }
 
-
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/WEB-INF/pages/");
-        templateResolver.setSuffix(".html");
+        templateResolver.setPrefix("/WEB-INF/pages/");//задаем папку где будут лежать наши представлени€
+        templateResolver.setSuffix(".html");//расширение представлений
         return templateResolver;
     }
 
@@ -41,7 +42,7 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
 
-    @Override
+    @Override// «адаем шаблонизатор
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());

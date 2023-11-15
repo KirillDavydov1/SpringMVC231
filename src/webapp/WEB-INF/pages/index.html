@@ -3,13 +3,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Title</title>
+
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
 </head>
 <body>
-<div>
-    <th:block th:each="msg : ${messages}">
-        <h1 th:text="${msg}"></h1>
-    </th:block>
-</div>
+<div th:align="center"></div>
+<h2>All users</h2>
+<table style="width:100%">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>LastName</th>
+        <th>Email</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:if="${#lists.isEmpty(listUsers)}">
+        <td colspan="6">No Records found. Add some...!</td>
+    </tr>
+    <tr th:each="user:${listUsers}">
+        <<td><a th:href="@{/getUserById(id=${user.getId()})}" th:text="${user.getId()}"></a></td>
+        <td th:text="${user.getFirstName()}"/>
+        <td th:text="${user.getLastName()}"/>
+        <td th:text="${user.getEmail()}"/>
+        <<td><a th:href="@{/delete(id=${user.getId()})}" th:text="Delete"></a></td>
+    </tr>
+</table>
+<br>
+<a th:href="@{/new}" th:text="New"></a>
 </body>
 </html>
