@@ -4,10 +4,7 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.ServiceUser;
 
@@ -29,7 +26,7 @@ public class UsersController {
         return "showUser";
     }
 
-    @PostMapping("/edit")
+    @PutMapping("/edit")
     public String update(@ModelAttribute("user") User user, Model model) {
         model.addAttribute("user", user);
         serviceUser.update(user);
@@ -48,8 +45,8 @@ public class UsersController {
         return "redirect:/show";
     }
 
-    @GetMapping("/delete")
-    public String deleteUser(@RequestParam("id") long id, Model model) {
+    @DeleteMapping("/delete")
+    public String deleteUser(@RequestParam("id") long id) {
         serviceUser.delete(id);
         return "redirect:/show";
     }

@@ -31,7 +31,11 @@
         <td th:text="${user.getFirstName()}"/>
         <td th:text="${user.getLastName()}"/>
         <td th:text="${user.getEmail()}"/>
-        <<td><a th:href="@{/delete(id=${user.getId()})}" th:text="Delete"></a></td>
+        <td>
+            <form th:method="DELETE" th:action="@{/delete(id=${user.getId()})}" th:object="${user}">
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
     </tr>
 </table>
 <br>
